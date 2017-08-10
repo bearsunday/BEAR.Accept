@@ -77,12 +77,11 @@ $available = [
         'text/html' => 'prod-html-app',
         'application/hal+json' => 'prod-hal-app',
         'application/json' => 'prod-app',
-        '*' => 'prod-html-app'
+        'cli' => 'cli-html-app'
     ],
     'Accept-Language' => [
         'ja' => 'ja',
-        'en-US' => 'us',
-        '*' => 'us'
+        'en-US' => 'us'
     ]
 ];
 $accept = new \BEAR\Accept\Accept($available);
