@@ -1,6 +1,7 @@
 # BEAR.Accept
 
-Provides content-negotiation tools using Accept* headers for BEAR.Sunday framework.
+Provides content-negotiation using Accept* headers for [BEAR.Sunday](http://bearsunday.github.io/)
+
 
 ## Composer install
 
@@ -23,15 +24,14 @@ class AppModule extends AbstractModule
     {
         $available = [
             'Accept' => [
-                'application/json+hal' => 'prod-hal-app',
+                'application/hal+json' => 'prod-hal-app',
                 'application/json' => 'prod-app',
                 'text/csv' => 'prod-csv-app',
-                '*' => 'prod-html-app'
+                'cli' => 'prod-html-app'
             ],
             'Accept-Language' => [
                 'en-US' => 'en',
-                'ja-JP' => 'ja',
-                '*' => 'ja',
+                'ja-JP' => 'ja'
             ]
         ];
         // $available support 'Accept' and 'Accept-Language' key only
@@ -39,6 +39,12 @@ class AppModule extends AbstractModule
     }
 }
 ```
+
+`Accept` specifies all of the available media in the format `[$mediatype => $context]`. `cli` is the context in case of console access. The renderer of the context of the media type matched by content negotiation is used for rendering the resource.
+
+`Accept-Language` specifies all available languages in the format `[$lang => $contextKey]`. 
+
+For example, if `application/hal+json` and `ja-JP`matches, the `$context` is `prod-hal-jp-app`. (We set `JpModule` in `App\Module` folder and bind it for Japanese.)
 
 # Usage
 
@@ -55,7 +61,7 @@ use use BEAR\Accept\Annotation\Produces;
 public function onGet()
 ```
 
-**application/json** and **text/csv** media type is available for this resource.
+**application/json** and **text/csv** media type is available for this resource.　The `Vary` header is added automatically.
 
 ## To All
 
@@ -63,7 +69,7 @@ To perform content negotiation on all resources, prepare a special bootstrap fil
 
 cn.php
 
-```
+```php
 require dirname(__DIR__) . '/vendor/autoload.php';
 
 $available = [
@@ -95,7 +101,7 @@ Add a vary header in `bootstrap.php` to enable caching when using content negoti
      $page->transfer($app->responder, $_SERVER);
 ```
 
-Prepare the module of the DI setting necessary for each language
+Prepare the module of the DI setting necessary for each language.
 
 ```php
 use BEAR\Sunday\Module\Constant\NamedModule;

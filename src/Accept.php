@@ -11,7 +11,6 @@ namespace BEAR\Accept;
 use Aura\Accept\AcceptFactory;
 use BEAR\Accept\Annotation\Available;
 use BEAR\Accept\Exception\InvalidContextKeyException;
-use BEAR\Accept\Exception\NoAsteriskMediaTypeException;
 
 final class Accept implements AcceptInterface
 {
@@ -41,9 +40,6 @@ final class Accept implements AcceptInterface
         if ($diff) {
             throw new InvalidContextKeyException($diff[0]);
         }
-        if (isset($available[self::MEDIA_TYPE]) && ! isset($available[self::MEDIA_TYPE]['*'])) {
-            throw new NoAsteriskMediaTypeException;
-        }
         $this->available = $available;
     }
 
@@ -68,11 +64,12 @@ final class Accept implements AcceptInterface
 
     private function getContext(\Aura\Accept\Accept $accept, array $server, array $defaultAvailable) : string
     {
-        if (! isset($server['HTTP_ACCEPT'])) {
-            return $defaultAvailable[self::MEDIA_TYPE]['*'];
+        if (! isset($server['HTTP_ACCEPT']) && PHP_SAPI === 'cli' && isset($defaultAvailable[self::MEDIA_TYPE]['cli'])) {
+            return $defaultAvailable[self::MEDIA_TYPE]['cli'];
         }
         $available = array_keys($defaultAvailable[self::MEDIA_TYPE]);
-        $mediaValue = $accept->negotiateMedia($available)->getValue();
+        $negotiatedMedia = $accept->negotiateMedia($available);
+        $mediaValue = $negotiatedMedia === false ? $available[0] : $negotiatedMedia->getValue();
         $context = $this->available[self::MEDIA_TYPE][$mediaValue];
 
         return $context;

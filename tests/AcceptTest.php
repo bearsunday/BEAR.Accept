@@ -7,7 +7,6 @@
 namespace BEAR\Accept;
 
 use BEAR\Accept\Exception\InvalidContextKeyException;
-use BEAR\Accept\Exception\NoAsteriskMediaTypeException;
 use PHPUnit\Framework\TestCase;
 
 class AcceptTest extends TestCase
@@ -22,8 +21,7 @@ class AcceptTest extends TestCase
         $available = [
             'Accept' => [
                 'application/json' => 'prod-app',
-                'text/csv' => 'prod-csv-app',
-                '*' => 'prod-html-app'            // when nothing match
+                'text/csv' => 'prod-csv-app'
             ]
         ];
         $accept = new Accept($available);
@@ -33,43 +31,59 @@ class AcceptTest extends TestCase
         $this->assertSame('Accept', (string) $vary);
     }
 
-    public function testNoMatchUseDefault()
+    public function testNoMatchUseFirstDefault()
     {
         $available = [
             'Accept' => [
-                'application/json' => 'prod-app',
-                '*' => 'prod-html-app'            // when nothing match
+                'application/ha+json' => 'prod-hal-api-app',
+                'application/json' => 'prod-api-app'
             ]
         ];
         $accept = new Accept($available);
-        $server['HTTP_ACCEPT'] = 'application/xml;q=1.0,text/csv;q=0.5,*;q=0.1';
+        $server['HTTP_ACCEPT'] = 'application/xml;q=1.0,*;q=0.1';
         list($actual) = $accept->__invoke($server);
-        $this->assertSame('prod-html-app', $actual);
+        $this->assertSame('prod-hal-api-app', $actual);
     }
 
-    public function testJsonPlusHal()
+    public function testMatchPriority()
     {
         $available = [
             'Accept' => [
-                'application/json+hal' => 'prod-hal-app',
-                'application/json' => 'prod-app',
-                '*' => 'prod-html-app'            // when nothing match
+                'application/hal+json' => 'prod-hal-api-app',
+                'application/json' => 'prod-api-app',
+                'cli' => 'cli-hal-api-app'                   // CLI
             ]
         ];
         $accept = new Accept($available);
-        $server['HTTP_ACCEPT'] = 'application/json+hal;q=1.0,text/csv;q=0.5,*;q=0.1';
+        $server['HTTP_ACCEPT'] = 'application/hal+json;q=1.0,text/csv;q=0.5,*;q=0.1';
         list($actual) = $accept->__invoke($server);
-        $this->assertSame('prod-hal-app', $actual);
+        $this->assertSame('prod-hal-api-app', $actual);
         $server['HTTP_ACCEPT'] = 'application/json;q=1.0,text/csv;q=0.5,*;q=0.1';
         list($actual) = $accept->__invoke($server);
-        $this->assertSame('prod-app', $actual);
+        $this->assertSame('prod-api-app', $actual);
     }
 
     public function testInvalidKey()
     {
         $this->expectException(InvalidContextKeyException::class);
-        $context = ['Invalid' => []];
-        $this->accept = new Accept($context);
+        $available = ['Invalid' => []];
+        $this->accept = new Accept($available);
+    }
+
+    public function testCli()
+    {
+        $available = [
+            'Accept' => [
+                'application/hal+json' => 'prod-hal-api-app',
+                'application/json' => 'prod-api-app',
+                'cli' => 'cli-hal-api-app'                   // CLI
+            ]
+        ];
+        $accept = new Accept($available);
+        $server = [];
+        list($actual, $vary) = $accept->__invoke($server);
+        $this->assertSame('cli-hal-api-app', $actual);
+        $this->assertSame('Accept', (string) $vary);
     }
 
     public function testLang()
@@ -79,12 +93,11 @@ class AcceptTest extends TestCase
                 'application/json+hal' => 'prod-hal-app',
                 'application/json' => 'prod-app',
                 'text/html' => 'prod-html-app',
-                '*' => 'prod-html-app'
+                'cli' => 'prod-html-app'
             ],
             'Accept-Language' => [
-                'en-US' => 'en',
                 'ja-JP' => 'ja',
-                '*' => 'ja',
+                'en-US' => 'en'
             ]
         ];
         $accept = new Accept($available);
@@ -111,16 +124,5 @@ class AcceptTest extends TestCase
         list($actual, $vary) = $accept->__invoke($server);
         $this->assertSame('prod-hal-ja-app', $actual);
         $this->assertSame('Accept, Accept-Language', (string) $vary);
-    }
-
-    public function testNoDefault()
-    {
-        $this->expectException(NoAsteriskMediaTypeException::class);
-        $available = [
-            'Accept' => [
-                'application/json+hal' => 'prod-hal-app',
-            ]
-        ];
-        new Accept($available);
     }
 }
