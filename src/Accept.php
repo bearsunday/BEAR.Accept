@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-
 namespace BEAR\Accept;
 
 use Aura\Accept\AcceptFactory;
@@ -35,7 +34,7 @@ final class Accept implements AcceptInterface
     {
         $diff = array_diff(array_keys($available), [self::MEDIA_TYPE, self::LANG]);
         if ($diff) {
-            throw new InvalidContextKeyException($diff[0]);
+            throw new InvalidContextKeyException((string) $diff[0]);
         }
         $this->available = $available;
     }
@@ -50,7 +49,11 @@ final class Accept implements AcceptInterface
         $vary = 'Accept';
         if (isset($this->available[self::LANG])) {
             $availableLang = array_keys($this->available[self::LANG]);
-            $lang = $accept->negotiateLanguage($availableLang)->getValue();
+            $negotiateLanguage = $accept->negotiateLanguage($availableLang);
+            if (! $negotiateLanguage) {
+                throw new \LogicException;
+            }
+            $lang = $negotiateLanguage->getValue();
             $langModule = $this->available[self::LANG][$lang];
             $context = str_replace('-app', sprintf('-%s-app', $langModule), $context);
             $vary .= ', Accept-Language';
