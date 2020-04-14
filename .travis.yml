@@ -1,24 +1,47 @@
 language: php
+
 php:
-  - 7.0
-  - 7.1
-sudo: false
+  - 7.2
+  - 7.3
+  - 7.4
+
 cache:
   directories:
+    - vendor
     - $HOME/.composer/cache
-matrix:
-  include:
-    - php: 7.0
-      env: dependencies=lowest
-    - php: 7.1
-      env: dependencies=lowest
-before_script:
+
+before_install:
+  - mv ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini{,.disabled} || echo "xdebug not available"
   - composer self-update
-  - if [ -z "$dependencies" ]; then composer install; fi;
-  - if [ "$dependencies" = "lowest" ]; then composer update --prefer-lowest; fi;
+
+install:
+  - composer update
+
 script:
- - if [ "$TRAVIS_PHP_VERSION" != "7.1" ]; then vendor/bin/phpunit; fi
- - if [ "$TRAVIS_PHP_VERSION" == "7.1" ]; then vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover; fi
-after_script:
-  - wget https://scrutinizer-ci.com/ocular.phar
-  - if [ "$TRAVIS_PHP_VERSION" == "7.1" ]; then php ocular.phar code-coverage:upload --format=php-clover coverage.clover; fi
+  - ./vendor/bin/phpunit;
+
+jobs:
+  fast_finish: true
+  include:
+  - stage: Test
+    name: Lowest dependencies
+    php: 7.2
+    install: composer update --prefer-dist --prefer-lowest
+
+  - stage: Test
+    name: Code coverage
+    php: 7.2
+    before_script:
+    - mv ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini{.disabled,}
+    - if [[ ! $(php -m | grep -si xdebug) ]]; then echo "xdebug required for coverage"; exit 1; fi
+    script:
+    - ./vendor/bin/phpunit -v --coverage-clover ./build/logs/clover.xml
+    after_script:
+    - wget https://scrutinizer-ci.com/ocular.phar && php ocular.phar code-coverage:upload --format=php-clover coverage.clover;
+
+  - stage: Code Quality
+    name: Coding standards
+    php: 7.2
+    install: composer require --dev friendsofphp/php-cs-fixer ^2.0;
+    script:
+      - ./vendor/bin/php-cs-fixer --dry-run -v fix;
