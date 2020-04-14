@@ -1,0 +1,9 @@
+parameters:
+  level: max
+  paths:
+    - src
+  checkMissingIterableValueType: false
+  ignoreErrors:
+  -
+    message: "#has no return typehint specified\\.$#"
+    path: tests/*.php
