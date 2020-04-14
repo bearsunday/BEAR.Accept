@@ -8,7 +8,6 @@ use BEAR\Accept\Module\AppModule;
 use BEAR\Accept\Resource\App\Foo;
 use BEAR\AppMeta\AppMeta;
 use BEAR\Package\AppMetaModule;
-use BEAR\Resource\ResourceObject;
 use PHPUnit\Framework\TestCase;
 use Ray\Di\Injector;
 
@@ -38,7 +37,7 @@ class AcceptInterceptorTest extends TestCase
     /**
      * @depends test2ndMatch
      */
-    public function test1stMatch(ResourceObject $foo)
+    public function test1stMatch(Foo $foo)
     {
         $foo->view = null;
         $_SERVER['HTTP_ACCEPT'] = 'application/hal+json;q=1.0,text/html;q=1.5,*;q=0.1';
@@ -51,7 +50,7 @@ class AcceptInterceptorTest extends TestCase
     /**
      * @depends test2ndMatch
      */
-    public function testNoMatch(ResourceObject $foo)
+    public function testNoMatch(Foo $foo)
     {
         $foo->view = null;
         $_SERVER['HTTP_ACCEPT'] = 'text/csv;q=1.5,*;q=0.1'; // no match
