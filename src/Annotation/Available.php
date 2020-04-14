@@ -1,9 +1,7 @@
 <?php
-/**
- * This file is part of the BEAR.Accept package.
- *
- * @license http://opensource.org/licenses/MIT MIT
- */
+
+declare(strict_types=1);
+
 namespace BEAR\Accept\Annotation;
 
 use Ray\Di\Di\Qualifier;
@@ -15,5 +13,8 @@ use Ray\Di\Di\Qualifier;
  */
 final class Available
 {
+    /**
+     * @var string
+     */
     public $value;
 }

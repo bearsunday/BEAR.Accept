@@ -1,9 +1,7 @@
 <?php
-/**
- * This file is part of the BEAR.Accept package.
- *
- * @license http://opensource.org/licenses/MIT MIT
- */
+
+declare(strict_types=1);
+
 namespace BEAR\Accept;
 
 use BEAR\Accept\Annotation\Available;
@@ -26,7 +24,7 @@ final class AcceptModule extends AbstractModule
     /**
      * {@inheritdoc}
      */
-    protected function configure()
+    protected function configure() : void
     {
         $this->bind()->annotatedWith(Available::class)->toInstance($this->available);
         $this->bind(AcceptInterface::class)->to(Accept::class);
