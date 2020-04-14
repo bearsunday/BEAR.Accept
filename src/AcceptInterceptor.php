@@ -40,13 +40,13 @@ final class AcceptInterceptor implements MethodInterceptor
     public function invoke(MethodInvocation $invocation) : ResourceObject
     {
         $produce = $invocation->getMethod()->getAnnotation(Produces::class);
-        /* @var $produce \BEAR\Accept\Annotation\Produces */
+        assert($produce instanceof Produces);
         $accept = $this->getAccept($this->available['Accept'], $produce->value);
         $accept = new Accept(['Accept' => $accept]);
         [$context, $vary] = $accept->__invoke($_SERVER);
         $renderer = (new AppInjector($this->appMeta->name, $context))->getInstance(RenderInterface::class);
         $ro = $invocation->getThis();
-        /* @var $ro \BEAR\Resource\ResourceObject */
+        assert($ro instanceof ResourceObject);
         $ro->setRenderer($renderer);
         $ro = $invocation->proceed();
         $ro->headers['Vary'] = $vary;
