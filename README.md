@@ -85,7 +85,7 @@ $available = [
     ]
 ];
 $accept = new \BEAR\Accept\Accept($available);
-list($context, $vary) = $accept($_SERVER);
+[$context, $vary] = $accept($_SERVER);
 
 require __DIR__ . '/bootstrap.php';
 ```
