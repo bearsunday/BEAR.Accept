@@ -42,6 +42,7 @@ class AcceptInterceptorTest extends TestCase
      */
     public function test1stMatch(ResourceObject $foo)
     {
+        $foo->view = null;
         $_SERVER['HTTP_ACCEPT'] = 'application/hal+json;q=1.0,text/html;q=1.5,*;q=0.1';
         $foo->onGet();
         $view = (string) $foo;
@@ -54,6 +55,7 @@ class AcceptInterceptorTest extends TestCase
      */
     public function testNoMatch(ResourceObject $foo)
     {
+        $foo->view = null;
         $_SERVER['HTTP_ACCEPT'] = 'text/csv;q=1.5,*;q=0.1'; // no match
         $foo->onGet();
         $view = (string) $foo;
