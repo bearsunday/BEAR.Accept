@@ -27,7 +27,7 @@ class AcceptInterceptorTest extends TestCase
         $injector = new Injector(new AcceptModule($available, new AppModule(new AppMetaModule(new AppMeta('BEAR\Accept')))), __DIR__ . '/tmp');
         $foo = $injector->getInstance(Foo::class);
         $_SERVER['HTTP_ACCEPT'] = 'application/json;q=1.0,text/html;q=1.5,*;q=0.1';
-
+        assert($foo instanceof Foo);
         $foo->onGet();
         $view = (string) $foo;
         $this->assertSame('{"message":"hello"}', $view);

@@ -24,7 +24,7 @@ final class AcceptModule extends AbstractModule
     /**
      * {@inheritdoc}
      */
-    protected function configure()
+    protected function configure() : void
     {
         $this->bind()->annotatedWith(Available::class)->toInstance($this->available);
         $this->bind(AcceptInterface::class)->to(Accept::class);

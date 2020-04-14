@@ -9,6 +9,7 @@ use BEAR\Accept\Annotation\Produces;
 use BEAR\AppMeta\AbstractAppMeta;
 use BEAR\Package\AppInjector;
 use BEAR\Resource\RenderInterface;
+use BEAR\Resource\ResourceObject;
 use Ray\Aop\MethodInterceptor;
 use Ray\Aop\MethodInvocation;
 
@@ -36,13 +37,13 @@ final class AcceptInterceptor implements MethodInterceptor
     /**
      * {@inheritdoc}
      */
-    public function invoke(MethodInvocation $invocation)
+    public function invoke(MethodInvocation $invocation) : ResourceObject
     {
         $produce = $invocation->getMethod()->getAnnotation(Produces::class);
         /* @var $produce \BEAR\Accept\Annotation\Produces */
         $accept = $this->getAccept($this->available['Accept'], $produce->value);
         $accept = new Accept(['Accept' => $accept]);
-        list($context, $vary) = $accept->__invoke($_SERVER);
+        [$context, $vary] = $accept->__invoke($_SERVER);
         $renderer = (new AppInjector($this->appMeta->name, $context))->getInstance(RenderInterface::class);
         $ro = $invocation->getThis();
         /* @var $ro \BEAR\Resource\ResourceObject */
