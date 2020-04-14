@@ -13,5 +13,8 @@ use Ray\Di\Di\Qualifier;
  */
 final class Available
 {
+    /**
+     * @var string
+     */
     public $value;
 }

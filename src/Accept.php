@@ -24,7 +24,7 @@ final class Accept implements AcceptInterface
     /**
      * Available type and lang
      *
-     * @var array ['Accept' => [[$mediaType =>],...], 'Accept-Language' => [[$lang =>]],...];
+     * @var array<array> ['Accept' => [[$mediaType =>],...], 'Accept-Language' => [[$lang =>]],...];
      */
     private $available;
 
