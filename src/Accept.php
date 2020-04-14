@@ -68,11 +68,11 @@ final class Accept implements AcceptInterface
         return $context;
     }
 
-    private function negotiate(AuraAccept $accept, string $context, string $vary): array
+    private function negotiate(AuraAccept $accept, string $context, string $vary) : array
     {
         $availableLang = array_keys($this->available[self::LANG]);
         $negotiateLanguage = $accept->negotiateLanguage($availableLang);
-        if (!$negotiateLanguage) {
+        if (! $negotiateLanguage) {
             throw new \LogicException;
         }
         $lang = $negotiateLanguage->getValue();
@@ -80,6 +80,6 @@ final class Accept implements AcceptInterface
         $context = str_replace('-app', sprintf('-%s-app', $langModule), $context);
         $vary .= ', Accept-Language';
 
-        return array($context, $vary);
+        return [$context, $vary];
     }
 }
