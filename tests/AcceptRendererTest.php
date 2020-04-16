@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace BEAR\Accept;
 
 use BEAR\Accept\Module\AppModule;
@@ -16,10 +18,16 @@ class AcceptRendererTest extends TestCase
      */
     private $acceptRender;
 
-    public function setUp(): void
+    protected function setUp() : void
     {
         parent::setUp();
-        $this->acceptRender = new AcceptRenderer;
+        $availableRenderer = [
+            'application/hal+json' => FakeHalRenderer::class
+        ];
+        $this->acceptRender = new AcceptRenderer(
+            new Injector(new AcceptRendererModule($availableRenderer)),
+            array_keys($availableRenderer)
+        );
     }
 
     public function testInnstaceOf()
