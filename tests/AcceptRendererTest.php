@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace BEAR\Accept;
 
+use function assert;
 use BEAR\Accept\Module\AppModule;
 use BEAR\Accept\Resource\App\Foo;
 use BEAR\AppMeta\Meta;
@@ -18,41 +19,50 @@ class AcceptRendererTest extends TestCase
      */
     private $acceptRender;
 
+    /**
+     * @var Foo
+     */
+    private $ro;
+
     protected function setUp() : void
     {
         parent::setUp();
         $availableRenderer = [
-            'application/hal+json' => FakeHalRenderer::class
+            'application/hal+json' => FakeHalRenderer::class,
+            '' => FakeDeafultRenderer::class
         ];
         $this->acceptRender = new AcceptRenderer(
             new Injector(new AcceptRendererModule($availableRenderer)),
             array_keys($availableRenderer)
         );
+        $injector = new Injector(new AppModule(new AppMetaModule(new Meta('BEAR\Accept'))), __DIR__ . '/tmp');
+        $ro = $injector->getInstance(Foo::class);
+        assert($ro instanceof Foo);
+        $this->ro = $ro;
     }
 
-    public function testInnstaceOf()
+    public function testInnstaceOf() : void
     {
         $this->assertInstanceOf(AcceptRenderer::class, $this->acceptRender);
     }
 
-    public function testRender()
+    public function testHalRender() : void
     {
-        $available = [
-            'Accept' => [
-                'application/hal+json' => 'hal-app',
-                'application/json' => 'app',
-                'text/html' => 'html-app',
-                '*' => 'app' // default
-            ]
-        ];
-        $injector = new Injector(new AppModule(new AppMetaModule(new Meta('BEAR\Accept'))), __DIR__ . '/tmp');
-        $foo = $injector->getInstance(Foo::class);
-        assert($foo instanceof Foo);
         $_SERVER['HTTP_ACCEPT'] = 'application/hal+json;q=1.0,text/html;q=1.5,*;q=0.1';
-        $foo->setRenderer($this->acceptRender);
-        $foo->onGet();
-        $view = (string) $foo;
+        $this->ro->setRenderer($this->acceptRender);
+        $this->ro->onGet();
+        $view = (string) $this->ro;
         $this->assertSame('fake-hal', $view);
-        $this->assertSame('Accept', $foo->headers['Vary']);
+        $this->assertSame('Accept', $this->ro->headers['Vary']);
+    }
+
+    public function testDefaultRender() : void
+    {
+        $_SERVER['HTTP_ACCEPT'] = '';
+        $this->ro->setRenderer($this->acceptRender);
+        $this->ro->onGet();
+        $view = (string) $this->ro;
+        $this->assertSame('*', $view);
+        $this->assertSame('Accept', $this->ro->headers['Vary']);
     }
 }
