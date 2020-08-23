@@ -8,7 +8,7 @@ use function assert;
 use BEAR\Accept\Module\AppModule;
 use BEAR\Accept\Resource\App\Foo;
 use BEAR\AppMeta\Meta;
-use BEAR\Package\AppMetaModule;
+use BEAR\Package\Module\AppMetaModule;
 use PHPUnit\Framework\TestCase;
 use Ray\Di\Injector;
 
