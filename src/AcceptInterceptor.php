@@ -17,13 +17,15 @@ use function assert;
 
 final class AcceptInterceptor implements MethodInterceptor
 {
-    /** @var array */
+    /** @var array<string, array<string, string>> */
     private $available;
 
     /** @var AbstractAppMeta */
     private $appMeta;
 
     /**
+     * @param array<string, array<string, string>> $available
+     *
      * @Available("available")
      */
     public function __construct(array $available, AbstractAppMeta $appMeta)

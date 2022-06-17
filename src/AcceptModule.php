@@ -13,6 +13,9 @@ final class AcceptModule extends AbstractModule
     /** @var array */
     private $available;
 
+    /**
+     * @param array<string, array<string, string>> $available
+     */
     public function __construct(array $available, ?AbstractModule $module = null)
     {
         $this->available = $available;

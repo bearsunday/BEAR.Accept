@@ -32,13 +32,16 @@ final class Accept implements AcceptInterface
     /**
      * Available type and lang
      *
-     * @var array<array> ['Accept' => [[$mediaType =>],...], 'Accept-Language' => [[$lang =>]],...];
+     * @var array<array<string, string>> ['Accept' => [[$mediaType =>],...], 'Accept-Language' => [[$lang =>]],...];
      */
     private $available;
 
     /**
+     * @param array<string, array<string, string>> $available
+     *
      * @Available
      */
+    #[Available()]
     public function __construct(array $available)
     {
         $diff = array_diff(array_keys($available), [self::MEDIA_TYPE, self::LANG]);
@@ -64,6 +67,10 @@ final class Accept implements AcceptInterface
         return [$context, $vary];
     }
 
+    /**
+     * @param array<string, string>                $server
+     * @param array<string, array<string, string>> $defaultAvailable
+     */
     private function getContext(AuraAccept $accept, array $server, array $defaultAvailable): string
     {
         if (! isset($server['HTTP_ACCEPT']) && PHP_SAPI === 'cli' && isset($defaultAvailable[self::MEDIA_TYPE]['cli'])) {
@@ -77,6 +84,9 @@ final class Accept implements AcceptInterface
         return $this->available[self::MEDIA_TYPE][$mediaValue];
     }
 
+    /**
+     * @return array<string>
+     */
     private function negotiate(AuraAccept $accept, string $context, string $vary): array
     {
         $availableLang = array_keys($this->available[self::LANG]);
