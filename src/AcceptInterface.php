@@ -9,5 +9,5 @@ interface AcceptInterface
     /**
      * Return context string
      */
-    public function __invoke(array $server) : array;
+    public function __invoke(array $server): array;
 }

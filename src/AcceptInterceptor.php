@@ -13,16 +13,14 @@ use BEAR\Resource\ResourceObject;
 use Ray\Aop\MethodInterceptor;
 use Ray\Aop\MethodInvocation;
 
+use function assert;
+
 final class AcceptInterceptor implements MethodInterceptor
 {
-    /**
-     * @var array
-     */
+    /** @var array */
     private $available;
 
-    /**
-     * @var AbstractAppMeta
-     */
+    /** @var AbstractAppMeta */
     private $appMeta;
 
     /**
@@ -37,7 +35,7 @@ final class AcceptInterceptor implements MethodInterceptor
     /**
      * {@inheritdoc}
      */
-    public function invoke(MethodInvocation $invocation) : ResourceObject
+    public function invoke(MethodInvocation $invocation): ResourceObject
     {
         $produce = $invocation->getMethod()->getAnnotation(Produces::class);
         assert($produce instanceof Produces);
@@ -54,7 +52,7 @@ final class AcceptInterceptor implements MethodInterceptor
         return $ro;
     }
 
-    private function getAccept(array $default, array $produces) : array
+    private function getAccept(array $default, array $produces): array
     {
         $accept = [];
         foreach ($produces as $produce) {
@@ -62,6 +60,7 @@ final class AcceptInterceptor implements MethodInterceptor
                 $accept[$produce] = $default[$produce];
             }
         }
+
         $accept['*'] = $default['*'];
 
         return $accept;

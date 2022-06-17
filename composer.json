@@ -19,7 +19,10 @@
     "require-dev": {
         "ext-json": "*",
         "bear/package": "^1.9.7",
-        "phpunit/phpunit": "^8.5"
+        "phpunit/phpunit": "^8.5",
+        "doctrine/coding-standard": "^9.0",
+        "vimeo/psalm": "^4.23",
+        "phpstan/phpstan": "^1.7"
     },
     "autoload": {
         "psr-4": {
@@ -39,8 +42,13 @@
         "test": ["@cs", "phpunit"],
         "tests": ["rm -rf tests/tmp/", "@cs", "phpstan analyse -c phpstan.neon --no-progress", "psalm --show-info=false", "@test"],
         "coverage": ["php -dzend_extension=xdebug.so ./vendor/bin/phpunit --coverage-text --coverage-html=build/coverage"],
-        "cs": ["php-cs-fixer fix -v --dry-run", "phpcs --standard=./phpcs.xml src"],
-        "cs-fix": ["php-cs-fixer fix -v", "phpcbf src"],
-        "metrics": ["phpmetrics --report-html=build/metrics/ --extensions=php src,composer.json,composer.lock"]
+        "cs": ["phpcs --standard=./phpcs.xml src"],
+        "cs-fix": ["phpcbf src"],
+        "baseline": "phpstan analyse -configuration -c phpstan.neon --generate-baseline && psalm --set-baseline=psalm-baseline.xml"
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
     }
 }

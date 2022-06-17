@@ -13,8 +13,6 @@ use Ray\Di\Di\Qualifier;
  */
 class Produces
 {
-    /**
-     * @var string[]
-     */
+    /** @var string[] */
     public $value;
 }

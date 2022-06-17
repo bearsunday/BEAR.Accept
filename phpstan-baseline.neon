@@ -1,0 +1,741 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Cannot access property \\$headers on mixed\\.$#"
+			count: 1
+			path: src/AcceptInterceptor.php
+
+		-
+			message: "#^Method BEAR\\\\Accept\\\\AcceptInterceptor\\:\\:invoke\\(\\) should return BEAR\\\\Resource\\\\ResourceObject but returns mixed\\.$#"
+			count: 1
+			path: src/AcceptInterceptor.php
+
+		-
+			message: "#^Parameter \\#1 \\$renderer of method BEAR\\\\Resource\\\\ResourceObject\\:\\:setRenderer\\(\\) expects BEAR\\\\Resource\\\\RenderInterface, mixed given\\.$#"
+			count: 1
+			path: src/AcceptInterceptor.php
+
+		-
+			message: "#^Method BEAR\\\\Accept\\\\AcceptInterceptorTest\\:\\:test1stMatch\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/AcceptInterceptorTest.php
+
+		-
+			message: "#^Method BEAR\\\\Accept\\\\AcceptInterceptorTest\\:\\:test2ndMatch\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/AcceptInterceptorTest.php
+
+		-
+			message: "#^Method BEAR\\\\Accept\\\\AcceptInterceptorTest\\:\\:testNoMatch\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/AcceptInterceptorTest.php
+
+		-
+			message: "#^Method BEAR\\\\Accept\\\\AcceptTest\\:\\:testAccepted\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/AcceptTest.php
+
+		-
+			message: "#^Method BEAR\\\\Accept\\\\AcceptTest\\:\\:testCli\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/AcceptTest.php
+
+		-
+			message: "#^Method BEAR\\\\Accept\\\\AcceptTest\\:\\:testInvalidKey\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/AcceptTest.php
+
+		-
+			message: "#^Method BEAR\\\\Accept\\\\AcceptTest\\:\\:testLang\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/AcceptTest.php
+
+		-
+			message: "#^Method BEAR\\\\Accept\\\\AcceptTest\\:\\:testLangJp\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/AcceptTest.php
+
+		-
+			message: "#^Method BEAR\\\\Accept\\\\AcceptTest\\:\\:testMatchPriority\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/AcceptTest.php
+
+		-
+			message: "#^Method BEAR\\\\Accept\\\\AcceptTest\\:\\:testNoMatchUseFirstDefault\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/AcceptTest.php
+
+		-
+			message: "#^Method BEAR\\\\Accept\\\\Resource\\\\App\\\\Foo\\:\\:onGet\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/Fake/app/src/Resource/App/Foo.php
+
+		-
+			message: "#^Variable \\$singleton might not be defined\\.$#"
+			count: 2
+			path: tests/Fake/app/var/tmp/app/di/-BEAR_RepositoryModule_Annotation_Commands.php
+
+		-
+			message: "#^Parameter \\#2 \\$appMeta of class BEAR\\\\Package\\\\Provide\\\\Error\\\\ErrorLogger constructor expects BEAR\\\\AppMeta\\\\AbstractAppMeta, mixed given\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/app/di/BEAR_Package_Provide_Error_ErrorLogger-.php
+
+		-
+			message: "#^Variable \\$singleton might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/app/di/BEAR_Package_Provide_Error_ErrorLogger-.php
+
+		-
+			message: "#^Variable \\$prototype might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/app/di/BEAR_Package_Provide_Representation_CreatedResourceInterceptor-.php
+
+		-
+			message: "#^Variable \\$prototype might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/app/di/BEAR_Package_Provide_Representation_CreatedResourceRenderer-.php
+
+		-
+			message: "#^Variable \\$singleton might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/app/di/BEAR_Package_Provide_Representation_CreatedResourceRenderer-.php
+
+		-
+			message: "#^Variable \\$prototype might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/app/di/BEAR_Package_Provide_Router_WebRouterInterface-.php
+
+		-
+			message: "#^Variable \\$singleton might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/app/di/BEAR_QueryRepository_CacheDependencyInterface-.php
+
+		-
+			message: "#^Variable \\$singleton might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/app/di/BEAR_QueryRepository_CacheInterceptor-.php
+
+		-
+			message: "#^Variable \\$prototype might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/app/di/BEAR_QueryRepository_CommandInterceptor-.php
+
+		-
+			message: "#^Variable \\$singleton might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/app/di/BEAR_QueryRepository_DonutCacheInterceptor-.php
+
+		-
+			message: "#^Variable \\$singleton might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/app/di/BEAR_QueryRepository_DonutCacheableResponseInterceptor-.php
+
+		-
+			message: "#^Variable \\$singleton might not be defined\\.$#"
+			count: 2
+			path: tests/Fake/app/var/tmp/app/di/BEAR_QueryRepository_DonutCommandInterceptor-.php
+
+		-
+			message: "#^Variable \\$prototype might not be defined\\.$#"
+			count: 5
+			path: tests/Fake/app/var/tmp/app/di/BEAR_QueryRepository_DonutRepository-.php
+
+		-
+			message: "#^Variable \\$singleton might not be defined\\.$#"
+			count: 2
+			path: tests/Fake/app/var/tmp/app/di/BEAR_QueryRepository_DonutRepository-.php
+
+		-
+			message: "#^Variable \\$prototype might not be defined\\.$#"
+			count: 5
+			path: tests/Fake/app/var/tmp/app/di/BEAR_QueryRepository_DonutRepositoryInterface-.php
+
+		-
+			message: "#^Variable \\$singleton might not be defined\\.$#"
+			count: 2
+			path: tests/Fake/app/var/tmp/app/di/BEAR_QueryRepository_DonutRepositoryInterface-.php
+
+		-
+			message: "#^Variable \\$prototype might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/app/di/BEAR_QueryRepository_EtagSetterInterface-.php
+
+		-
+			message: "#^Variable \\$singleton might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/app/di/BEAR_QueryRepository_HeaderSetter-.php
+
+		-
+			message: "#^Parameter \\#5 \\$expiry of class BEAR\\\\QueryRepository\\\\QueryRepository constructor expects BEAR\\\\QueryRepository\\\\Expiry, mixed given\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/app/di/BEAR_QueryRepository_QueryRepository-.php
+
+		-
+			message: "#^Variable \\$prototype might not be defined\\.$#"
+			count: 3
+			path: tests/Fake/app/var/tmp/app/di/BEAR_QueryRepository_QueryRepository-.php
+
+		-
+			message: "#^Variable \\$singleton might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/app/di/BEAR_QueryRepository_QueryRepository-.php
+
+		-
+			message: "#^Parameter \\#5 \\$expiry of class BEAR\\\\QueryRepository\\\\QueryRepository constructor expects BEAR\\\\QueryRepository\\\\Expiry, mixed given\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/app/di/BEAR_QueryRepository_QueryRepositoryInterface-.php
+
+		-
+			message: "#^Variable \\$prototype might not be defined\\.$#"
+			count: 3
+			path: tests/Fake/app/var/tmp/app/di/BEAR_QueryRepository_QueryRepositoryInterface-.php
+
+		-
+			message: "#^Variable \\$singleton might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/app/di/BEAR_QueryRepository_QueryRepositoryInterface-.php
+
+		-
+			message: "#^Variable \\$singleton might not be defined\\.$#"
+			count: 2
+			path: tests/Fake/app/var/tmp/app/di/BEAR_QueryRepository_RefreshAnnotatedCommand-.php
+
+		-
+			message: "#^Variable \\$prototype might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/app/di/BEAR_QueryRepository_RefreshInterceptor-.php
+
+		-
+			message: "#^Variable \\$injector might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/app/di/BEAR_QueryRepository_ResourceStorageInterface-.php
+
+		-
+			message: "#^Variable \\$prototype might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/app/di/BEAR_QueryRepository_ResourceStorageInterface-.php
+
+		-
+			message: "#^Variable \\$singleton might not be defined\\.$#"
+			count: 3
+			path: tests/Fake/app/var/tmp/app/di/BEAR_QueryRepository_ResourceStorageInterface-.php
+
+		-
+			message: "#^Variable \\$prototype might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/app/di/BEAR_Resource_AnchorInterface-.php
+
+		-
+			message: "#^Variable \\$prototype might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/app/di/BEAR_Resource_EmbedInterceptor-.php
+
+		-
+			message: "#^Variable \\$singleton might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/app/di/BEAR_Resource_EmbedInterceptor-.php
+
+		-
+			message: "#^Variable \\$prototype might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/app/di/BEAR_Resource_ExtraMethodInvoker-.php
+
+		-
+			message: "#^Variable \\$prototype might not be defined\\.$#"
+			count: 3
+			path: tests/Fake/app/var/tmp/app/di/BEAR_Resource_FactoryInterface-.php
+
+		-
+			message: "#^Variable \\$prototype might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/app/di/BEAR_Resource_HalLink-.php
+
+		-
+			message: "#^Variable \\$prototype might not be defined\\.$#"
+			count: 2
+			path: tests/Fake/app/var/tmp/app/di/BEAR_Resource_InvokerInterface-.php
+
+		-
+			message: "#^Variable \\$singleton might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/app/di/BEAR_Resource_InvokerInterface-.php
+
+		-
+			message: "#^Variable \\$prototype might not be defined\\.$#"
+			count: 3
+			path: tests/Fake/app/var/tmp/app/di/BEAR_Resource_LinkerInterface-.php
+
+		-
+			message: "#^Variable \\$prototype might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/app/di/BEAR_Resource_NamedParamMetasInterface-.php
+
+		-
+			message: "#^Variable \\$injector might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/app/di/BEAR_Resource_NamedParameterInterface-.php
+
+		-
+			message: "#^Variable \\$prototype might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/app/di/BEAR_Resource_NamedParameterInterface-.php
+
+		-
+			message: "#^Variable \\$prototype might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/app/di/BEAR_Resource_OptionsMethods-.php
+
+		-
+			message: "#^Variable \\$singleton might not be defined\\.$#"
+			count: 2
+			path: tests/Fake/app/var/tmp/app/di/BEAR_Resource_RenderInterface-BEAR_Streamer_Annotation_Stream.php
+
+		-
+			message: "#^Variable \\$prototype might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/app/di/BEAR_Resource_RenderInterface-options.php
+
+		-
+			message: "#^Variable \\$prototype might not be defined\\.$#"
+			count: 5
+			path: tests/Fake/app/var/tmp/app/di/BEAR_Resource_ResourceInterface-.php
+
+		-
+			message: "#^Variable \\$injector might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/app/di/BEAR_Resource_SchemeCollectionInterface-.php
+
+		-
+			message: "#^Variable \\$singleton might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/app/di/BEAR_Resource_TransferInterface-BEAR_Streamer_Annotation_Stream.php
+
+		-
+			message: "#^Variable \\$singleton might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/app/di/BEAR_Streamer_StreamerInterface-.php
+
+		-
+			message: "#^Variable \\$prototype might not be defined\\.$#"
+			count: 4
+			path: tests/Fake/app/var/tmp/app/di/BEAR_Sunday_Extension_Application_AppInterface-.php
+
+		-
+			message: "#^Variable \\$singleton might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/app/di/BEAR_Sunday_Extension_Application_AppInterface-.php
+
+		-
+			message: "#^Variable \\$prototype might not be defined\\.$#"
+			count: 3
+			path: tests/Fake/app/var/tmp/app/di/BEAR_Sunday_Extension_Error_ErrorInterface-.php
+
+		-
+			message: "#^Variable \\$prototype might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/app/di/BEAR_Sunday_Extension_Error_ThrowableHandlerInterface-.php
+
+		-
+			message: "#^Variable \\$prototype might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/app/di/BEAR_Sunday_Extension_Router_RouterInterface-.php
+
+		-
+			message: "#^Variable \\$prototype might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/app/di/BEAR_Sunday_Extension_Transfer_HttpCacheInterface-.php
+
+		-
+			message: "#^Variable \\$prototype might not be defined\\.$#"
+			count: 2
+			path: tests/Fake/app/var/tmp/app/di/BEAR_Sunday_Extension_Transfer_TransferInterface-.php
+
+		-
+			message: "#^Variable \\$prototype might not be defined\\.$#"
+			count: 2
+			path: tests/Fake/app/var/tmp/app/di/Doctrine_Common_Annotations_Reader-.php
+
+		-
+			message: "#^Variable \\$prototype might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/app/di/Koriym_ParamReader_ParamReaderInterface-.php
+
+		-
+			message: "#^Parameter \\#1 \\$appMeta of class BEAR\\\\Package\\\\Provide\\\\Logger\\\\MonologProvider constructor expects BEAR\\\\AppMeta\\\\AbstractAppMeta, mixed given\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/app/di/Psr_Log_LoggerInterface-.php
+
+		-
+			message: "#^Variable \\$injector might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/app/di/Ray_Di_AssistedInjectInterceptor-.php
+
+		-
+			message: "#^Variable \\$singleton might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/app/di/Ray_Di_AssistedInjectInterceptor-.php
+
+		-
+			message: "#^Variable \\$injector might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/app/di/Ray_Di_AssistedInterceptor-.php
+
+		-
+			message: "#^Variable \\$singleton might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/app/di/Ray_Di_AssistedInterceptor-.php
+
+		-
+			message: "#^Variable \\$injector might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/app/di/Ray_Di_InjectorInterface-.php
+
+		-
+			message: "#^Variable \\$injectionPoint might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/app/di/Ray_Di_ProviderInterface-.php
+
+		-
+			message: "#^Variable \\$injector might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/app/di/Ray_Di_ProviderInterface-.php
+
+		-
+			message: "#^Variable \\$prototype might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/app/di/Ray_Di_ProviderInterface-.php
+
+		-
+			message: "#^Variable \\$singleton might not be defined\\.$#"
+			count: 2
+			path: tests/Fake/app/var/tmp/hal-app/di/-BEAR_RepositoryModule_Annotation_Commands.php
+
+		-
+			message: "#^Parameter \\#2 \\$appMeta of class BEAR\\\\Package\\\\Provide\\\\Error\\\\ErrorLogger constructor expects BEAR\\\\AppMeta\\\\AbstractAppMeta, mixed given\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/hal-app/di/BEAR_Package_Provide_Error_ErrorLogger-.php
+
+		-
+			message: "#^Variable \\$singleton might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/hal-app/di/BEAR_Package_Provide_Error_ErrorLogger-.php
+
+		-
+			message: "#^Variable \\$prototype might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/hal-app/di/BEAR_Package_Provide_Representation_CreatedResourceInterceptor-.php
+
+		-
+			message: "#^Variable \\$prototype might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/hal-app/di/BEAR_Package_Provide_Representation_CreatedResourceRenderer-.php
+
+		-
+			message: "#^Variable \\$singleton might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/hal-app/di/BEAR_Package_Provide_Representation_CreatedResourceRenderer-.php
+
+		-
+			message: "#^Variable \\$prototype might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/hal-app/di/BEAR_Package_Provide_Router_WebRouterInterface-.php
+
+		-
+			message: "#^Variable \\$singleton might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/hal-app/di/BEAR_QueryRepository_CacheDependencyInterface-.php
+
+		-
+			message: "#^Variable \\$singleton might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/hal-app/di/BEAR_QueryRepository_CacheInterceptor-.php
+
+		-
+			message: "#^Variable \\$prototype might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/hal-app/di/BEAR_QueryRepository_CommandInterceptor-.php
+
+		-
+			message: "#^Variable \\$singleton might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/hal-app/di/BEAR_QueryRepository_DonutCacheInterceptor-.php
+
+		-
+			message: "#^Variable \\$singleton might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/hal-app/di/BEAR_QueryRepository_DonutCacheableResponseInterceptor-.php
+
+		-
+			message: "#^Variable \\$singleton might not be defined\\.$#"
+			count: 2
+			path: tests/Fake/app/var/tmp/hal-app/di/BEAR_QueryRepository_DonutCommandInterceptor-.php
+
+		-
+			message: "#^Variable \\$prototype might not be defined\\.$#"
+			count: 5
+			path: tests/Fake/app/var/tmp/hal-app/di/BEAR_QueryRepository_DonutRepository-.php
+
+		-
+			message: "#^Variable \\$singleton might not be defined\\.$#"
+			count: 2
+			path: tests/Fake/app/var/tmp/hal-app/di/BEAR_QueryRepository_DonutRepository-.php
+
+		-
+			message: "#^Variable \\$prototype might not be defined\\.$#"
+			count: 5
+			path: tests/Fake/app/var/tmp/hal-app/di/BEAR_QueryRepository_DonutRepositoryInterface-.php
+
+		-
+			message: "#^Variable \\$singleton might not be defined\\.$#"
+			count: 2
+			path: tests/Fake/app/var/tmp/hal-app/di/BEAR_QueryRepository_DonutRepositoryInterface-.php
+
+		-
+			message: "#^Variable \\$prototype might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/hal-app/di/BEAR_QueryRepository_EtagSetterInterface-.php
+
+		-
+			message: "#^Variable \\$singleton might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/hal-app/di/BEAR_QueryRepository_HeaderSetter-.php
+
+		-
+			message: "#^Parameter \\#5 \\$expiry of class BEAR\\\\QueryRepository\\\\QueryRepository constructor expects BEAR\\\\QueryRepository\\\\Expiry, mixed given\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/hal-app/di/BEAR_QueryRepository_QueryRepository-.php
+
+		-
+			message: "#^Variable \\$prototype might not be defined\\.$#"
+			count: 3
+			path: tests/Fake/app/var/tmp/hal-app/di/BEAR_QueryRepository_QueryRepository-.php
+
+		-
+			message: "#^Variable \\$singleton might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/hal-app/di/BEAR_QueryRepository_QueryRepository-.php
+
+		-
+			message: "#^Parameter \\#5 \\$expiry of class BEAR\\\\QueryRepository\\\\QueryRepository constructor expects BEAR\\\\QueryRepository\\\\Expiry, mixed given\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/hal-app/di/BEAR_QueryRepository_QueryRepositoryInterface-.php
+
+		-
+			message: "#^Variable \\$prototype might not be defined\\.$#"
+			count: 3
+			path: tests/Fake/app/var/tmp/hal-app/di/BEAR_QueryRepository_QueryRepositoryInterface-.php
+
+		-
+			message: "#^Variable \\$singleton might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/hal-app/di/BEAR_QueryRepository_QueryRepositoryInterface-.php
+
+		-
+			message: "#^Variable \\$singleton might not be defined\\.$#"
+			count: 2
+			path: tests/Fake/app/var/tmp/hal-app/di/BEAR_QueryRepository_RefreshAnnotatedCommand-.php
+
+		-
+			message: "#^Variable \\$prototype might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/hal-app/di/BEAR_QueryRepository_RefreshInterceptor-.php
+
+		-
+			message: "#^Variable \\$injector might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/hal-app/di/BEAR_QueryRepository_ResourceStorageInterface-.php
+
+		-
+			message: "#^Variable \\$prototype might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/hal-app/di/BEAR_QueryRepository_ResourceStorageInterface-.php
+
+		-
+			message: "#^Variable \\$singleton might not be defined\\.$#"
+			count: 3
+			path: tests/Fake/app/var/tmp/hal-app/di/BEAR_QueryRepository_ResourceStorageInterface-.php
+
+		-
+			message: "#^Variable \\$prototype might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/hal-app/di/BEAR_Resource_AnchorInterface-.php
+
+		-
+			message: "#^Variable \\$prototype might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/hal-app/di/BEAR_Resource_EmbedInterceptor-.php
+
+		-
+			message: "#^Variable \\$singleton might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/hal-app/di/BEAR_Resource_EmbedInterceptor-.php
+
+		-
+			message: "#^Variable \\$prototype might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/hal-app/di/BEAR_Resource_ExtraMethodInvoker-.php
+
+		-
+			message: "#^Variable \\$prototype might not be defined\\.$#"
+			count: 3
+			path: tests/Fake/app/var/tmp/hal-app/di/BEAR_Resource_FactoryInterface-.php
+
+		-
+			message: "#^Variable \\$prototype might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/hal-app/di/BEAR_Resource_HalLink-.php
+
+		-
+			message: "#^Variable \\$prototype might not be defined\\.$#"
+			count: 2
+			path: tests/Fake/app/var/tmp/hal-app/di/BEAR_Resource_InvokerInterface-.php
+
+		-
+			message: "#^Variable \\$singleton might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/hal-app/di/BEAR_Resource_InvokerInterface-.php
+
+		-
+			message: "#^Variable \\$prototype might not be defined\\.$#"
+			count: 3
+			path: tests/Fake/app/var/tmp/hal-app/di/BEAR_Resource_LinkerInterface-.php
+
+		-
+			message: "#^Variable \\$prototype might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/hal-app/di/BEAR_Resource_NamedParamMetasInterface-.php
+
+		-
+			message: "#^Variable \\$injector might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/hal-app/di/BEAR_Resource_NamedParameterInterface-.php
+
+		-
+			message: "#^Variable \\$prototype might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/hal-app/di/BEAR_Resource_NamedParameterInterface-.php
+
+		-
+			message: "#^Variable \\$prototype might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/hal-app/di/BEAR_Resource_OptionsMethods-.php
+
+		-
+			message: "#^Variable \\$singleton might not be defined\\.$#"
+			count: 2
+			path: tests/Fake/app/var/tmp/hal-app/di/BEAR_Resource_RenderInterface-BEAR_Streamer_Annotation_Stream.php
+
+		-
+			message: "#^Variable \\$prototype might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/hal-app/di/BEAR_Resource_RenderInterface-options.php
+
+		-
+			message: "#^Variable \\$prototype might not be defined\\.$#"
+			count: 5
+			path: tests/Fake/app/var/tmp/hal-app/di/BEAR_Resource_ResourceInterface-.php
+
+		-
+			message: "#^Variable \\$injector might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/hal-app/di/BEAR_Resource_SchemeCollectionInterface-.php
+
+		-
+			message: "#^Variable \\$singleton might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/hal-app/di/BEAR_Resource_TransferInterface-BEAR_Streamer_Annotation_Stream.php
+
+		-
+			message: "#^Variable \\$singleton might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/hal-app/di/BEAR_Streamer_StreamerInterface-.php
+
+		-
+			message: "#^Variable \\$prototype might not be defined\\.$#"
+			count: 4
+			path: tests/Fake/app/var/tmp/hal-app/di/BEAR_Sunday_Extension_Application_AppInterface-.php
+
+		-
+			message: "#^Variable \\$singleton might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/hal-app/di/BEAR_Sunday_Extension_Application_AppInterface-.php
+
+		-
+			message: "#^Variable \\$prototype might not be defined\\.$#"
+			count: 3
+			path: tests/Fake/app/var/tmp/hal-app/di/BEAR_Sunday_Extension_Error_ErrorInterface-.php
+
+		-
+			message: "#^Variable \\$prototype might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/hal-app/di/BEAR_Sunday_Extension_Error_ThrowableHandlerInterface-.php
+
+		-
+			message: "#^Variable \\$prototype might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/hal-app/di/BEAR_Sunday_Extension_Router_RouterInterface-.php
+
+		-
+			message: "#^Variable \\$prototype might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/hal-app/di/BEAR_Sunday_Extension_Transfer_HttpCacheInterface-.php
+
+		-
+			message: "#^Variable \\$prototype might not be defined\\.$#"
+			count: 2
+			path: tests/Fake/app/var/tmp/hal-app/di/BEAR_Sunday_Extension_Transfer_TransferInterface-.php
+
+		-
+			message: "#^Variable \\$prototype might not be defined\\.$#"
+			count: 2
+			path: tests/Fake/app/var/tmp/hal-app/di/Doctrine_Common_Annotations_Reader-.php
+
+		-
+			message: "#^Variable \\$prototype might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/hal-app/di/Koriym_ParamReader_ParamReaderInterface-.php
+
+		-
+			message: "#^Parameter \\#1 \\$appMeta of class BEAR\\\\Package\\\\Provide\\\\Logger\\\\MonologProvider constructor expects BEAR\\\\AppMeta\\\\AbstractAppMeta, mixed given\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/hal-app/di/Psr_Log_LoggerInterface-.php
+
+		-
+			message: "#^Variable \\$injector might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/hal-app/di/Ray_Di_AssistedInjectInterceptor-.php
+
+		-
+			message: "#^Variable \\$singleton might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/hal-app/di/Ray_Di_AssistedInjectInterceptor-.php
+
+		-
+			message: "#^Variable \\$injector might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/hal-app/di/Ray_Di_AssistedInterceptor-.php
+
+		-
+			message: "#^Variable \\$singleton might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/hal-app/di/Ray_Di_AssistedInterceptor-.php
+
+		-
+			message: "#^Variable \\$injector might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/hal-app/di/Ray_Di_InjectorInterface-.php
+
+		-
+			message: "#^Variable \\$injectionPoint might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/hal-app/di/Ray_Di_ProviderInterface-.php
+
+		-
+			message: "#^Variable \\$injector might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/hal-app/di/Ray_Di_ProviderInterface-.php
+
+		-
+			message: "#^Variable \\$prototype might not be defined\\.$#"
+			count: 1
+			path: tests/Fake/app/var/tmp/hal-app/di/Ray_Di_ProviderInterface-.php

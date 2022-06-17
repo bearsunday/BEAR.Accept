@@ -8,18 +8,26 @@ use Aura\Accept\Accept as AuraAccept;
 use Aura\Accept\AcceptFactory;
 use BEAR\Accept\Annotation\Available;
 use BEAR\Accept\Exception\InvalidContextKeyException;
+use LogicException;
+
+use function array_diff;
+use function array_keys;
+use function sprintf;
+use function str_replace;
+
+use const PHP_SAPI;
 
 final class Accept implements AcceptInterface
 {
     /**
      * A header key for accept media type
      */
-    const MEDIA_TYPE = 'Accept';
+    public const MEDIA_TYPE = 'Accept';
 
     /**
      * A header key for accept language
      */
-    const LANG = 'Accept-Language';
+    public const LANG = 'Accept-Language';
 
     /**
      * Available type and lang
@@ -37,13 +45,14 @@ final class Accept implements AcceptInterface
         if ($diff) {
             throw new InvalidContextKeyException((string) $diff[0]);
         }
+
         $this->available = $available;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function __invoke(array $server) : array
+    public function __invoke(array $server): array
     {
         $accept = (new AcceptFactory($server))->newInstance();
         $context = $this->getContext($accept, $server, $this->available);
@@ -55,26 +64,27 @@ final class Accept implements AcceptInterface
         return [$context, $vary];
     }
 
-    private function getContext(AuraAccept $accept, array $server, array $defaultAvailable) : string
+    private function getContext(AuraAccept $accept, array $server, array $defaultAvailable): string
     {
         if (! isset($server['HTTP_ACCEPT']) && PHP_SAPI === 'cli' && isset($defaultAvailable[self::MEDIA_TYPE]['cli'])) {
             return $defaultAvailable[self::MEDIA_TYPE]['cli'];
         }
+
         $available = array_keys($defaultAvailable[self::MEDIA_TYPE]);
         $negotiatedMedia = $accept->negotiateMedia($available);
         $mediaValue = $negotiatedMedia === false ? $available[0] : $negotiatedMedia->getValue();
-        $context = $this->available[self::MEDIA_TYPE][$mediaValue];
 
-        return $context;
+        return $this->available[self::MEDIA_TYPE][$mediaValue];
     }
 
-    private function negotiate(AuraAccept $accept, string $context, string $vary) : array
+    private function negotiate(AuraAccept $accept, string $context, string $vary): array
     {
         $availableLang = array_keys($this->available[self::LANG]);
         $negotiateLanguage = $accept->negotiateLanguage($availableLang);
         if (! $negotiateLanguage) {
-            throw new \LogicException;
+            throw new LogicException();
         }
+
         $lang = $negotiateLanguage->getValue();
         $langModule = $this->available[self::LANG][$lang];
         $context = str_replace('-app', sprintf('-%s-app', $langModule), $context);

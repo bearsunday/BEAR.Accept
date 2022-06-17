@@ -10,12 +10,10 @@ use Ray\Di\AbstractModule;
 
 final class AcceptModule extends AbstractModule
 {
-    /**
-     * @var array
-     */
+    /** @var array */
     private $available;
 
-    public function __construct(array $available, AbstractModule $module = null)
+    public function __construct(array $available, ?AbstractModule $module = null)
     {
         $this->available = $available;
         parent::__construct($module);
@@ -24,7 +22,7 @@ final class AcceptModule extends AbstractModule
     /**
      * {@inheritdoc}
      */
-    protected function configure() : void
+    protected function configure(): void
     {
         $this->bind()->annotatedWith(Available::class)->toInstance($this->available);
         $this->bind(AcceptInterface::class)->to(Accept::class);
