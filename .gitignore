@@ -12,3 +12,5 @@ phpunit.xml
 composer.lock
 vendor/
 .php_cs.cache
+/.phpcs-cache
+/.phpunit.result.cache
