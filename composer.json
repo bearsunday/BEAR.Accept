@@ -40,9 +40,13 @@
     },
     "scripts" :{
         "test": ["@cs", "phpunit"],
-        "tests": ["rm -rf tests/tmp/", "@cs", "phpstan analyse -c phpstan.neon --no-progress", "psalm --show-info=false", "@test"],
+        "tests": ["rm -rf tests/tmp/", "@cs", "@sa", "@test"],
         "coverage": ["php -dzend_extension=xdebug.so ./vendor/bin/phpunit --coverage-text --coverage-html=build/coverage"],
         "cs": ["phpcs --standard=./phpcs.xml src"],
+        "sa": [
+            "psalm --monochrome --show-info=true",
+            "./vendor/bin/phpstan analyse -c phpstan.neon"
+        ],
         "cs-fix": ["phpcbf src"],
         "baseline": "phpstan analyse -configuration -c phpstan.neon --generate-baseline && psalm --set-baseline=psalm-baseline.xml"
     },
