@@ -29,7 +29,7 @@ class AcceptInterceptorTest extends TestCase
         assert($foo instanceof Foo);
         $foo->onGet();
         $view = (string) $foo;
-        $this->assertSame('{"message":"hello"}', $view);
+        $this->assertSame('{"message":"hello"}', json_encode(json_decode($view)));
 
         return $foo;
     }
@@ -56,6 +56,6 @@ class AcceptInterceptorTest extends TestCase
         $_SERVER['HTTP_ACCEPT'] = 'text/csv;q=1.5,*;q=0.1'; // no match
         $foo->onGet();
         $view = (string) $foo;
-        $this->assertSame('{"message":"hello"}', $view);
+        $this->assertSame('{"message":"hello"}', json_encode(json_decode($view)));
     }
 }
