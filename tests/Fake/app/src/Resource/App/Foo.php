@@ -16,6 +16,7 @@ class Foo extends ResourceObject
     /**
      * @Produces({"text/csv", "application/json", "application/hal+json"})
      */
+    #[Produces(['text/csv', 'application/json', 'application/hal+json'])]
     public function onGet()
     {
         return $this;

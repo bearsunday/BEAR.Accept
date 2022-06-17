@@ -28,6 +28,7 @@ final class AcceptInterceptor implements MethodInterceptor
      *
      * @Available("available")
      */
+    #[Available('available')]
     public function __construct(array $available, AbstractAppMeta $appMeta)
     {
         $this->available = $available;
@@ -47,13 +48,21 @@ final class AcceptInterceptor implements MethodInterceptor
         $renderer = (new AppInjector($this->appMeta->name, $context))->getInstance(RenderInterface::class);
         $ro = $invocation->getThis();
         assert($ro instanceof ResourceObject);
+        assert($renderer instanceof RenderInterface);
         $ro->setRenderer($renderer);
+        /** @var ResourceObject $ro */
         $ro = $invocation->proceed();
         $ro->headers['Vary'] = $vary;
 
         return $ro;
     }
 
+    /**
+     * @param array<string, string> $default
+     * @param array<string, string> $produces
+     *
+     * @return array<string, string>
+     */
     private function getAccept(array $default, array $produces): array
     {
         $accept = [];
