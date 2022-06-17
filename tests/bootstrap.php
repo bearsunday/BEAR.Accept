@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 // no annotation in PHP 8
 use Koriym\Attributes\AttributeReader;
 use Ray\ServiceLocator\ServiceLocator;
