@@ -17,6 +17,8 @@
         "aura/accept": "^4.0"
     },
     "require-dev": {
+        "ext-json": "*",
+        "bear/package": "^1.9.7",
         "phpunit/phpunit": "^8.5"
     },
     "autoload": {
