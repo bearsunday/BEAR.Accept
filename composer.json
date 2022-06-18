@@ -13,12 +13,17 @@
         }
     ],
     "require": {
-        "php": ">=7.2",
-        "aura/accept": "^2.2.5",
-        "bear/package": "^1.9.7"
+        "php": "^7.4 || ^8.0",
+        "aura/accept": "^4.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "^8.5"
+        "ext-json": "*",
+        "bear/package": "^1.9.7",
+        "phpunit/phpunit": "^8.5",
+        "doctrine/coding-standard": "^9.0",
+        "vimeo/psalm": "^4.23",
+        "phpstan/phpstan": "^1.7",
+        "squizlabs/php_codesniffer": "^3.7"
     },
     "autoload": {
         "psr-4": {
@@ -36,10 +41,19 @@
     },
     "scripts" :{
         "test": ["@cs", "phpunit"],
-        "tests": ["rm -rf tests/tmp/", "@cs", "phpstan analyse -c phpstan.neon --no-progress", "psalm --show-info=false", "@test"],
+        "tests": ["rm -rf tests/tmp/", "@cs", "@sa", "@test"],
         "coverage": ["php -dzend_extension=xdebug.so ./vendor/bin/phpunit --coverage-text --coverage-html=build/coverage"],
-        "cs": ["php-cs-fixer fix -v --dry-run", "phpcs --standard=./phpcs.xml src"],
-        "cs-fix": ["php-cs-fixer fix -v", "phpcbf src"],
-        "metrics": ["phpmetrics --report-html=build/metrics/ --extensions=php src,composer.json,composer.lock"]
+        "cs": ["./vendor/bin/phpcs --standard=./phpcs.xml src tests"],
+        "sa": [
+            "./vendor/bin/psalm --monochrome --show-info=true",
+            "./vendor/bin/phpstan analyse -c phpstan.neon"
+        ],
+        "cs-fix": ["./vendor/bin/phpcbf src tests"],
+        "baseline": "./vendor/bin/phpstan analyse -configuration -c ./vendor/bin/phpstan.neon --generate-baseline && ./vendor/bin/psalm --set-baseline=psalm-baseline.xml"
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
     }
 }

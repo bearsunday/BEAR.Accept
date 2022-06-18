@@ -13,21 +13,22 @@ use BEAR\Resource\ResourceObject;
 use Ray\Aop\MethodInterceptor;
 use Ray\Aop\MethodInvocation;
 
+use function assert;
+
 final class AcceptInterceptor implements MethodInterceptor
 {
-    /**
-     * @var array
-     */
+    /** @var array<string, array<string, string>> */
     private $available;
 
-    /**
-     * @var AbstractAppMeta
-     */
+    /** @var AbstractAppMeta */
     private $appMeta;
 
     /**
+     * @param array<string, array<string, string>> $available
+     *
      * @Available("available")
      */
+    #[Available('available')]
     public function __construct(array $available, AbstractAppMeta $appMeta)
     {
         $this->available = $available;
@@ -37,7 +38,7 @@ final class AcceptInterceptor implements MethodInterceptor
     /**
      * {@inheritdoc}
      */
-    public function invoke(MethodInvocation $invocation) : ResourceObject
+    public function invoke(MethodInvocation $invocation): ResourceObject
     {
         $produce = $invocation->getMethod()->getAnnotation(Produces::class);
         assert($produce instanceof Produces);
@@ -47,14 +48,22 @@ final class AcceptInterceptor implements MethodInterceptor
         $renderer = (new AppInjector($this->appMeta->name, $context))->getInstance(RenderInterface::class);
         $ro = $invocation->getThis();
         assert($ro instanceof ResourceObject);
+        assert($renderer instanceof RenderInterface);
         $ro->setRenderer($renderer);
+        /** @var ResourceObject $ro */
         $ro = $invocation->proceed();
         $ro->headers['Vary'] = $vary;
 
         return $ro;
     }
 
-    private function getAccept(array $default, array $produces) : array
+    /**
+     * @param array<string, string> $default
+     * @param array<string, string> $produces
+     *
+     * @return array<string, string>
+     */
+    private function getAccept(array $default, array $produces): array
     {
         $accept = [];
         foreach ($produces as $produce) {
@@ -62,6 +71,7 @@ final class AcceptInterceptor implements MethodInterceptor
                 $accept[$produce] = $default[$produce];
             }
         }
+
         $accept['*'] = $default['*'];
 
         return $accept;
