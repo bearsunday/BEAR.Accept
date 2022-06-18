@@ -48,7 +48,7 @@ For example, if `application/hal+json` and `ja-JP`matches, the `$context` is `pr
 
 # Usage
 
-## By Resource
+## Apply to the specified resource
 
 Annotate the resource to do content negotiation with `@Produces`.
 
@@ -63,7 +63,8 @@ public function onGet()
 
 **application/json** and **text/csv** media type is available for this resource.　The `Vary` header is added automatically.
 
-## To All
+
+## Apply to all resources
 
 To perform content negotiation on all resources, prepare a special bootstrap file. This is especially useful when negotiating languages.
 
@@ -86,13 +87,13 @@ $available = [
 ];
 $accept = new \BEAR\Accept\Accept($available);
 [$context, $vary] = $accept($_SERVER);
+//
 
-require __DIR__ . '/bootstrap.php';
 ```
 
-Add a vary header in `bootstrap.php` to enable caching when using content negotiation.
+Add a vary header in `Bootstrap` to enable caching when using content negotiation.
 
-```php
+```diff
 +    /* @global \BEAR\Resource\Vary $vary */
 +    if (isset($vary)) {
 +        $page->headers['Vary'] = $vary;
@@ -117,7 +118,3 @@ class JaModule extends AbstractModule
     }
 }
 ```
-
-# Requirements
-
- * php7.0+
