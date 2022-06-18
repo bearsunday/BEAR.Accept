@@ -22,7 +22,8 @@
         "phpunit/phpunit": "^8.5",
         "doctrine/coding-standard": "^9.0",
         "vimeo/psalm": "^4.23",
-        "phpstan/phpstan": "^1.7"
+        "phpstan/phpstan": "^1.7",
+        "squizlabs/php_codesniffer": "^3.7"
     },
     "autoload": {
         "psr-4": {
@@ -42,13 +43,13 @@
         "test": ["@cs", "phpunit"],
         "tests": ["rm -rf tests/tmp/", "@cs", "@sa", "@test"],
         "coverage": ["php -dzend_extension=xdebug.so ./vendor/bin/phpunit --coverage-text --coverage-html=build/coverage"],
-        "cs": ["phpcs --standard=./phpcs.xml src tests"],
+        "cs": ["./vendor/bin/phpcs --standard=./phpcs.xml src tests"],
         "sa": [
-            "psalm --monochrome --show-info=true",
+            "./vendor/bin/psalm --monochrome --show-info=true",
             "./vendor/bin/phpstan analyse -c phpstan.neon"
         ],
-        "cs-fix": ["phpcbf src tests"],
-        "baseline": "phpstan analyse -configuration -c phpstan.neon --generate-baseline && psalm --set-baseline=psalm-baseline.xml"
+        "cs-fix": ["./vendor/bin/phpcbf src tests"],
+        "baseline": "./vendor/bin/phpstan analyse -configuration -c ./vendor/bin/phpstan.neon --generate-baseline && ./vendor/bin/psalm --set-baseline=psalm-baseline.xml"
     },
     "config": {
         "allow-plugins": {
