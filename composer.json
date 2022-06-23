@@ -49,7 +49,7 @@
             "./vendor/bin/phpstan analyse -c phpstan.neon"
         ],
         "cs-fix": ["./vendor/bin/phpcbf src tests"],
-        "baseline": "./vendor/bin/phpstan analyse -configuration -c ./vendor/bin/phpstan.neon --generate-baseline && ./vendor/bin/psalm --set-baseline=psalm-baseline.xml"
+        "clean": ["./vendor/bin/phpstan clear-result-cache", "./vendor/bin/psalm --clear-cache", "rm -rf tests/tmp/*.php"]
     },
     "config": {
         "allow-plugins": {

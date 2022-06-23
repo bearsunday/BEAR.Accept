@@ -46,7 +46,7 @@ final class Accept implements AcceptInterface
     {
         $diff = array_diff(array_keys($available), [self::MEDIA_TYPE, self::LANG]);
         if ($diff) {
-            throw new InvalidContextKeyException((string) $diff[0]);
+            throw new InvalidContextKeyException($diff[0]);
         }
 
         $this->available = $available;
