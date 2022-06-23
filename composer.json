@@ -16,7 +16,7 @@
         "php": "^7.4 || ^8.0",
         "aura/accept": "^4.0",
         "bear/sunday": "^1.6",
-        "bear/package": "^1.10"
+        "bear/package": "^1.14"
     },
     "require-dev": {
         "ext-json": "*",
