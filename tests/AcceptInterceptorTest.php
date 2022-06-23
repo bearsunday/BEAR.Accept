@@ -6,8 +6,8 @@ namespace BEAR\Accept;
 
 use BEAR\Accept\Module\AppModule;
 use BEAR\Accept\Resource\App\Foo;
-use BEAR\AppMeta\AppMeta;
-use BEAR\Package\AppMetaModule;
+use BEAR\AppMeta\Meta;
+use BEAR\Package\Module\AppMetaModule;
 use PHPUnit\Framework\TestCase;
 use Ray\Di\Injector;
 
@@ -27,7 +27,7 @@ class AcceptInterceptorTest extends TestCase
                 '*' => 'app', // default
             ],
         ];
-        $injector = new Injector(new AcceptModule($available, new AppModule(new AppMetaModule(new AppMeta('BEAR\Accept')))), __DIR__ . '/tmp');
+        $injector = new Injector(new AcceptModule($available, new AppModule(new AppMetaModule(new Meta('BEAR\Accept')))), __DIR__ . '/tmp');
         $foo = $injector->getInstance(Foo::class);
         $_SERVER['HTTP_ACCEPT'] = 'application/json;q=1.0,text/html;q=1.5,*;q=0.1';
         assert($foo instanceof Foo);
