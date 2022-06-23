@@ -7,7 +7,7 @@ namespace BEAR\Accept;
 use BEAR\Accept\Annotation\Available;
 use BEAR\Accept\Annotation\Produces;
 use BEAR\AppMeta\AbstractAppMeta;
-use BEAR\Package\AppInjector;
+use BEAR\Package\Injector;
 use BEAR\Resource\RenderInterface;
 use BEAR\Resource\ResourceObject;
 use Ray\Aop\MethodInterceptor;
@@ -45,7 +45,7 @@ final class AcceptInterceptor implements MethodInterceptor
         $accept = $this->getAccept($this->available['Accept'], $produce->value);
         $accept = new Accept(['Accept' => $accept]);
         [$context, $vary] = $accept->__invoke($_SERVER);
-        $renderer = (new AppInjector($this->appMeta->name, $context))->getInstance(RenderInterface::class);
+        $renderer = Injector::getInstance($this->appMeta->name, $context, $this->appMeta->appDir)->getInstance(RenderInterface::class);
         $ro = $invocation->getThis();
         assert($ro instanceof ResourceObject);
         assert($renderer instanceof RenderInterface);
