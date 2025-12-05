@@ -18,9 +18,7 @@ final class AcceptModule extends AbstractModule
         parent::__construct($module);
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     protected function configure(): void
     {
         $this->bind()->annotatedWith(Available::class)->toInstance($this->available);

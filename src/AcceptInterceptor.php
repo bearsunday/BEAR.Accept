@@ -13,7 +13,11 @@ use BEAR\Resource\ResourceObject;
 use Ray\Aop\MethodInterceptor;
 use Ray\Aop\MethodInvocation;
 
+use function array_filter;
 use function assert;
+use function is_string;
+
+use const ARRAY_FILTER_USE_BOTH;
 
 final class AcceptInterceptor implements MethodInterceptor
 {
@@ -25,20 +29,20 @@ final class AcceptInterceptor implements MethodInterceptor
     ) {
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     public function invoke(MethodInvocation $invocation): ResourceObject
     {
         $produce = $invocation->getMethod()->getAnnotation(Produces::class);
         assert($produce instanceof Produces);
         $accept = $this->getAccept($this->available['Accept'], $produce->value);
         $accept = new Accept(['Accept' => $accept]);
-        [$context, $vary] = $accept->__invoke($_SERVER);
+        /** @var array<string, string> $server */
+        $server = array_filter($_SERVER, static fn ($v, $k): bool => is_string($k) && is_string($v), ARRAY_FILTER_USE_BOTH);
+        [$context, $vary] = $accept->__invoke($server);
+        assert($context !== '');
         $renderer = Injector::getInstance($this->appMeta->name, $context, $this->appMeta->appDir)->getInstance(RenderInterface::class);
         $ro = $invocation->getThis();
         assert($ro instanceof ResourceObject);
-        assert($renderer instanceof RenderInterface);
         $ro->setRenderer($renderer);
         /** @var ResourceObject $ro */
         $ro = $invocation->proceed();
@@ -49,7 +53,7 @@ final class AcceptInterceptor implements MethodInterceptor
 
     /**
      * @param array<string, string> $default
-     * @param array<string, string> $produces
+     * @param array<string>         $produces
      *
      * @return array<string, string>
      */

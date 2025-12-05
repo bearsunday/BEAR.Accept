@@ -40,9 +40,7 @@ final class Accept implements AcceptInterface
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     public function __invoke(array $server): array
     {
         $accept = (new AcceptFactory($server))->newInstance();
