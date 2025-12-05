@@ -14,3 +14,4 @@ vendor/
 .php_cs.cache
 /.phpcs-cache
 /.phpunit.result.cache
+tests/Fake/app/var/
