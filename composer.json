@@ -13,10 +13,10 @@
         }
     ],
     "require": {
-        "php": "^8.1",
+        "php": "^8.2",
         "aura/accept": "^4.0",
         "bear/sunday": "^1.6",
-        "bear/package": "^1.14",
+        "bear/package": "^1.20",
         "koriym/attributes": "^1.0"
     },
     "require-dev": {
