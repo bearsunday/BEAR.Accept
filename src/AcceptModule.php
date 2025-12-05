@@ -10,20 +10,16 @@ use Ray\Di\AbstractModule;
 
 final class AcceptModule extends AbstractModule
 {
-    /** @var array */
-    private $available;
-
-    /**
-     * @param array<string, array<string, string>> $available
-     */
-    public function __construct(array $available, ?AbstractModule $module = null)
-    {
-        $this->available = $available;
+    /** @param array<string, array<string, string>> $available */
+    public function __construct(
+        private readonly array $available,
+        ?AbstractModule $module = null,
+    ) {
         parent::__construct($module);
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function configure(): void
     {
@@ -32,7 +28,7 @@ final class AcceptModule extends AbstractModule
         $this->bindInterceptor(
             $this->matcher->any(),
             $this->matcher->annotatedWith(Produces::class),
-            [AcceptInterceptor::class]
+            [AcceptInterceptor::class],
         );
     }
 }

@@ -38,9 +38,7 @@ class AcceptInterceptorTest extends TestCase
         return $foo;
     }
 
-    /**
-     * @depends test2ndMatch
-     */
+    /** @depends test2ndMatch */
     public function test1stMatch(Foo $foo): void
     {
         $foo->view = null;
@@ -51,9 +49,7 @@ class AcceptInterceptorTest extends TestCase
         $this->assertSame('Accept', $foo->headers['Vary']);
     }
 
-    /**
-     * @depends test2ndMatch
-     */
+    /** @depends test2ndMatch */
     public function testNoMatch(Foo $foo): void
     {
         $foo->view = null;

@@ -13,9 +13,6 @@ class Foo extends ResourceObject
 {
     public $body = ['message' => 'hello'];
 
-    /**
-     * @Produces({"text/csv", "application/json", "application/hal+json"})
-     */
     #[Produces(['text/csv', 'application/json', 'application/hal+json'])]
     public function onGet()
     {

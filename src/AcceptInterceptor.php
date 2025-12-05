@@ -17,26 +17,16 @@ use function assert;
 
 final class AcceptInterceptor implements MethodInterceptor
 {
-    /** @var array<string, array<string, string>> */
-    private $available;
-
-    /** @var AbstractAppMeta */
-    private $appMeta;
-
-    /**
-     * @param array<string, array<string, string>> $available
-     *
-     * @Available("available")
-     */
-    #[Available('available')]
-    public function __construct(array $available, AbstractAppMeta $appMeta)
-    {
-        $this->available = $available;
-        $this->appMeta = $appMeta;
+    /** @param array<string, array<string, string>> $available */
+    public function __construct(
+        #[Available('available')]
+        private readonly array $available,
+        private readonly AbstractAppMeta $appMeta,
+    ) {
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function invoke(MethodInvocation $invocation): ResourceObject
     {

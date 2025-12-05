@@ -108,9 +108,7 @@ class AcceptTest extends TestCase
         return $accept;
     }
 
-    /**
-     * @depends testLang
-     */
+    /** @depends testLang */
     public function testLangJp(Accept $accept): void
     {
         $server = [
