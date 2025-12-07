@@ -19,13 +19,13 @@ use function is_string;
 
 use const ARRAY_FILTER_USE_BOTH;
 
-final class AcceptInterceptor implements MethodInterceptor
+final readonly class AcceptInterceptor implements MethodInterceptor
 {
     /** @param array<string, array<string, string>> $available */
     public function __construct(
         #[Available('available')]
-        private readonly array $available,
-        private readonly AbstractAppMeta $appMeta,
+        private array $available,
+        private AbstractAppMeta $appMeta,
     ) {
     }
 

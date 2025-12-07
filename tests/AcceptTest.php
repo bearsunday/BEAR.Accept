@@ -5,13 +5,12 @@ declare(strict_types=1);
 namespace BEAR\Accept;
 
 use BEAR\Accept\Exception\InvalidContextKeyException;
+use LogicException;
+use PHPUnit\Framework\Attributes\Depends;
 use PHPUnit\Framework\TestCase;
 
 class AcceptTest extends TestCase
 {
-    /** @var Accept */
-    protected $accept;
-
     public function testAccepted(): void
     {
         $available = [
@@ -108,7 +107,7 @@ class AcceptTest extends TestCase
         return $accept;
     }
 
-    /** @depends testLang */
+    #[Depends('testLang')]
     public function testLangJp(Accept $accept): void
     {
         $server = [
@@ -118,5 +117,20 @@ class AcceptTest extends TestCase
         [$actual, $vary] = $accept->__invoke($server);
         $this->assertSame('prod-hal-ja-app', $actual);
         $this->assertSame('Accept, Accept-Language', (string) $vary);
+    }
+
+    public function testLangNoMatch(): void
+    {
+        $this->expectException(LogicException::class);
+        $available = [
+            'Accept' => ['application/json' => 'prod-app'],
+            'Accept-Language' => ['ja-JP' => 'ja'],
+        ];
+        $accept = new Accept($available);
+        $server = [
+            'HTTP_ACCEPT' => 'application/json',
+            'HTTP_ACCEPT_LANGUAGE' => 'fr-FR',
+        ];
+        $accept->__invoke($server);
     }
 }

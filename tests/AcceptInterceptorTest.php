@@ -8,6 +8,7 @@ use BEAR\Accept\Module\AppModule;
 use BEAR\Accept\Resource\App\Foo;
 use BEAR\AppMeta\Meta;
 use BEAR\Package\Module\AppMetaModule;
+use PHPUnit\Framework\Attributes\Depends;
 use PHPUnit\Framework\TestCase;
 use Ray\Di\Injector;
 
@@ -38,7 +39,7 @@ class AcceptInterceptorTest extends TestCase
         return $foo;
     }
 
-    /** @depends test2ndMatch */
+    #[Depends('test2ndMatch')]
     public function test1stMatch(Foo $foo): void
     {
         $foo->view = null;
@@ -49,7 +50,7 @@ class AcceptInterceptorTest extends TestCase
         $this->assertSame('Accept', $foo->headers['Vary']);
     }
 
-    /** @depends test2ndMatch */
+    #[Depends('test2ndMatch')]
     public function testNoMatch(Foo $foo): void
     {
         $foo->view = null;

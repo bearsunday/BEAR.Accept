@@ -17,22 +17,18 @@ use function str_replace;
 
 use const PHP_SAPI;
 
-final class Accept implements AcceptInterface
+final readonly class Accept implements AcceptInterface
 {
-    /**
-     * A header key for accept media type
-     */
+    /** A header key for accept media type */
     public const MEDIA_TYPE = 'Accept';
 
-    /**
-     * A header key for accept language
-     */
+    /** A header key for accept language */
     public const LANG = 'Accept-Language';
 
     /** @param array<string, array<string, string>> $available Available type and lang ['Accept' => [[$mediaType =>],...], 'Accept-Language' => [[$lang =>]],...]; */
     public function __construct(
         #[Available]
-        private readonly array $available,
+        private array $available,
     ) {
         $diff = array_diff(array_keys($available), [self::MEDIA_TYPE, self::LANG]);
         if ($diff) {

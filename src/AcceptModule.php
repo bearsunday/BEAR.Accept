@@ -13,7 +13,7 @@ final class AcceptModule extends AbstractModule
     /** @param array<string, array<string, string>> $available */
     public function __construct(
         private readonly array $available,
-        ?AbstractModule $module = null,
+        AbstractModule|null $module = null,
     ) {
         parent::__construct($module);
     }
