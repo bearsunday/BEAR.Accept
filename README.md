@@ -50,14 +50,12 @@ For example, if `application/hal+json` and `ja-JP`matches, the `$context` is `pr
 
 ## Apply to the specified resource
 
-Annotate the resource to do content negotiation with `@Produces`.
+Annotate the resource to do content negotiation with `#[Produces]`.
 
 ```php
-use use BEAR\Accept\Annotation\Produces;
+use BEAR\Accept\Annotation\Produces;
 
-/**
- * @Produces({"application/json", "text/csv"})
- */
+#[Produces(['application/json', 'text/csv'])]
 public function onGet()
 ```
 

@@ -23,7 +23,7 @@ final readonly class AcceptInterceptor implements MethodInterceptor
 {
     /** @param array<string, array<string, string>> $available */
     public function __construct(
-        #[Available('available')]
+        #[Available]
         private array $available,
         private AbstractAppMeta $appMeta,
     ) {
