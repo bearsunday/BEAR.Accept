@@ -6,6 +6,6 @@ namespace BEAR\Accept\Exception;
 
 use LogicException;
 
-class InvalidContextKeyException extends LogicException
+final class InvalidContextKeyException extends LogicException
 {
 }

@@ -13,19 +13,14 @@
         }
     ],
     "require": {
-        "php": "^7.4 || ^8.0",
+        "php": "^8.2",
         "aura/accept": "^4.0",
-        "bear/sunday": "^1.6",
-        "bear/package": "^1.14"
+        "bear/package": "^1.20",
+        "bear/sunday": "^1.6"
     },
     "require-dev": {
-        "ext-json": "*",
-        "phpunit/phpunit": "^8.5.24 || ^9.5",
-        "doctrine/coding-standard": "^9.0",
-        "vimeo/psalm": "^4.23",
-        "phpstan/phpstan": "^1.7",
-        "squizlabs/php_codesniffer": "^3.7",
-        "ray/aop": "^2.12.1"
+        "bamarni/composer-bin-plugin": "^1.4",
+        "phpunit/phpunit": "^11.0"
     },
     "autoload": {
         "psr-4": {
@@ -41,21 +36,27 @@
             ]
         }
     },
-    "scripts" :{
-        "test": ["@cs", "phpunit"],
-        "tests": ["rm -rf tests/tmp/", "@cs", "@sa", "@test"],
-        "coverage": ["php -dzend_extension=xdebug.so ./vendor/bin/phpunit --coverage-text --coverage-html=build/coverage"],
-        "cs": ["./vendor/bin/phpcs --standard=./phpcs.xml src tests"],
-        "sa": [
-            "./vendor/bin/psalm --monochrome --show-info=true",
-            "./vendor/bin/phpstan analyse -c phpstan.neon"
-        ],
-        "cs-fix": ["./vendor/bin/phpcbf src tests"],
-        "clean": ["./vendor/bin/phpstan clear-result-cache", "./vendor/bin/psalm --clear-cache", "rm -rf tests/tmp/*.php"]
+    "scripts": {
+        "test": "phpunit --log-junit=build/junit.xml",
+        "tests": ["@cs", "@sa", "@test"],
+        "coverage": ["php -dzend_extension=xdebug.so -dxdebug.mode=coverage ./vendor/bin/phpunit --coverage-text --coverage-html=build/coverage"],
+        "pcov": ["php -dextension=pcov.so -d pcov.enabled=1 ./vendor/bin/phpunit --coverage-text --coverage-html=build/coverage --coverage-clover=coverage.xml"],
+        "cs": ["vendor-bin/tools/vendor/squizlabs/php_codesniffer/bin/phpcs --standard=./phpcs.xml src tests"],
+        "cs-fix": ["vendor-bin/tools/vendor/squizlabs/php_codesniffer/bin/phpcbf src tests"],
+        "clean": ["vendor-bin/tools/vendor/phpstan/phpstan/phpstan clear-result-cache", "vendor-bin/tools/vendor/vimeo/psalm/psalm --clear-cache", "rm -rf tests/tmp/*.php"],
+        "sa": ["vendor-bin/tools/vendor/vimeo/psalm/psalm -m -c psalm.xml --show-info=false", "vendor-bin/tools/vendor/phpstan/phpstan/phpstan analyse -c phpstan.neon --no-progress"],
+        "baseline": ["vendor-bin/tools/vendor/phpstan/phpstan/phpstan analyse -c phpstan.neon --generate-baseline", "vendor-bin/tools/vendor/vimeo/psalm/psalm --set-baseline=psalm-baseline.xml"]
     },
     "config": {
+        "sort-packages": true,
         "allow-plugins": {
-            "dealerdirect/phpcodesniffer-composer-installer": true
+            "bamarni/composer-bin-plugin": true
+        }
+    },
+    "extra": {
+        "bamarni-bin": {
+            "bin-links": true,
+            "forward-command": true
         }
     }
 }

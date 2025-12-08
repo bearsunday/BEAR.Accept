@@ -17,44 +17,26 @@ use function str_replace;
 
 use const PHP_SAPI;
 
-final class Accept implements AcceptInterface
+final readonly class Accept implements AcceptInterface
 {
-    /**
-     * A header key for accept media type
-     */
+    /** A header key for accept media type */
     public const MEDIA_TYPE = 'Accept';
 
-    /**
-     * A header key for accept language
-     */
+    /** A header key for accept language */
     public const LANG = 'Accept-Language';
 
-    /**
-     * Available type and lang
-     *
-     * @var array<array<string, string>> ['Accept' => [[$mediaType =>],...], 'Accept-Language' => [[$lang =>]],...];
-     */
-    private $available;
-
-    /**
-     * @param array<string, array<string, string>> $available
-     *
-     * @Available
-     */
-    #[Available()]
-    public function __construct(array $available)
-    {
+    /** @param array<string, array<string, string>> $available Available type and lang ['Accept' => [[$mediaType =>],...], 'Accept-Language' => [[$lang =>]],...]; */
+    public function __construct(
+        #[Available]
+        private array $available,
+    ) {
         $diff = array_diff(array_keys($available), [self::MEDIA_TYPE, self::LANG]);
         if ($diff) {
             throw new InvalidContextKeyException($diff[0]);
         }
-
-        $this->available = $available;
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    /** {@inheritDoc} */
     public function __invoke(array $server): array
     {
         $accept = (new AcceptFactory($server))->newInstance();
@@ -84,9 +66,7 @@ final class Accept implements AcceptInterface
         return $this->available[self::MEDIA_TYPE][$mediaValue];
     }
 
-    /**
-     * @return array<string>
-     */
+    /** @return array<string> */
     private function negotiate(AuraAccept $accept, string $context, string $vary): array
     {
         $availableLang = array_keys($this->available[self::LANG]);
