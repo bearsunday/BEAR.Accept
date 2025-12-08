@@ -16,8 +16,7 @@
         "php": "^8.2",
         "aura/accept": "^4.0",
         "bear/package": "^1.20",
-        "bear/sunday": "^1.6",
-        "koriym/attributes": "^1.0"
+        "bear/sunday": "^1.6"
     },
     "require-dev": {
         "bamarni/composer-bin-plugin": "^1.4",
