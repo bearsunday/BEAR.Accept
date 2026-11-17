@@ -17,7 +17,10 @@ use Ray\Di\Di\Qualifier;
 #[Qualifier]
 final class Produces
 {
-    /** @param array<string> $value Media types the method produces, highest priority first */
+    /**
+     * @param array<string> $value Media types the method produces, highest priority first;
+     *                             types absent from the `Accept` map of #[Available] are ignored
+     */
     public function __construct(
         public readonly array $value,
     ) {
