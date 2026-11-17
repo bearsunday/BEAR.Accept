@@ -13,9 +13,9 @@
         }
     ],
     "require": {
-        "php": "^8.3",
+        "php": "^8.2",
         "aura/accept": "^4.0",
-        "bear/package": "^1.26",
+        "bear/package": "^1.24",
         "bear/sunday": "^1.6"
     },
     "require-dev": {
