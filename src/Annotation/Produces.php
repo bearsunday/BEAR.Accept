@@ -18,7 +18,9 @@ use Ray\Di\Di\Qualifier;
 final class Produces
 {
     /**
-     * @param array<string> $value Media types the method produces, highest priority first;
+     * @param array<string> $value Media types the method produces; a match on an explicit `Accept` type
+     *                             follows the client's quality and order, while the first listed type is
+     *                             used for a full wildcard, a missing `Accept`, or no match;
      *                             types absent from the `Accept` map of #[Available] are ignored
      */
     public function __construct(
